@@ -7,12 +7,12 @@ environment:
   sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
-
+  carousel_slider: ^5.0.0
+  smooth_page_indicator: ^1.2.0+3
   curved_navigation_bar: ^1.0.6
+  cached_network_image: ^3.4.1
   flutter:
     sdk: flutter
-
-
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +21,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    # รูปภาพ
+    - assets/banners/Korean_Food.png
