@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme:
             ColorScheme.fromSeed(seedColor: Color.fromARGB(239, 245, 188, 2)),
-        scaffoldBackgroundColor: Colors.lightGreen,
+        scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
       ),
       home: Main(),
@@ -37,44 +37,44 @@ class Main extends StatefulWidget {
 
 //class state เขียน Code ภาษา dart เพอื่รับค่าจากหนา้จอมาคา นวณและส่งคา่่กลบัไปแสดงผล
 class _MainState extends State<Main> {
-  final items = const [
-    Icon(
-      Icons.favorite,
+  int selectedIndex = 1;
 
-      ///ประเภท icon
-      size: 30,
+  List<Widget> items() {
+    return [
+      Icon(
+        Icons.favorite,
+        size: selectedIndex == 0 ? 37 : 30,
+        color: selectedIndex == 0 ? Colors.white : Colors.white,
+      ),
+      Icon(
+        Icons.home,
+        size: selectedIndex == 1 ? 37 : 30,
+        color: selectedIndex == 1 ? Colors.white : Colors.white,
+      ),
+      Icon(
+        Icons.fastfood,
+        size: selectedIndex == 2 ? 37 : 30,
+        color: selectedIndex == 2 ? Colors.white : Colors.white,
+      ),
+    ];
+  }
 
-      ///ขนาด icon
-      color: Colors.red,
+  final PageController _pageController = PageController(initialPage: 1);
 
-      ///เปลี่ยนสี icon
-    ),
-    Icon(
-      Icons.home,
-      size: 30,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.fastfood,
-      size: 30,
-      color: Colors.red,
-    ),
-  ];
-
-  int index = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-        items: items,
-        index: index,
-        onTap: (selectedIndex) {
+        items: items(),
+        index: selectedIndex,
+        onTap: (index) {
           setState(() {
-            index = selectedIndex;
+            selectedIndex = index;
+            _pageController.jumpToPage(index);
           });
         },
-        height: 70,
-        color: Colors.green,
+        height: 65,
+        color: Color.fromRGBO(255, 47, 8, 1),
 
         /// เปลี่ยนสี Nav
         backgroundColor: Colors.transparent,
@@ -85,9 +85,23 @@ class _MainState extends State<Main> {
 
         /// animation ความไว
       ),
-      body: Container(
-        child: getSelectedWidget(index: index),
+
+      ///สามารถเลื่อนไปจออื่นได้
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+        },
+        children: [
+          Favorite(),
+          Home(),
+          Food(),
+        ],
       ),
+
+      ///สามารถเลื่อนไปจออื่นได้
     );
   }
 
