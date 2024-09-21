@@ -38,6 +38,21 @@ class Main extends StatefulWidget {
 //class state เขียน Code ภาษา dart เพอื่รับค่าจากหนา้จอมาคา นวณและส่งคา่่กลบัไปแสดงผล
 class _MainState extends State<Main> {
   int selectedIndex = 1;
+  double _opacity = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeIn();
+  }
+
+  void _fadeIn() {
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
+  }
 
   List<Widget> items() {
     return [
@@ -96,7 +111,11 @@ class _MainState extends State<Main> {
         },
         children: [
           Favorite(),
-          Home(),
+          AnimatedOpacity(
+            opacity: _opacity,
+            duration: Duration(milliseconds: 500),
+            child: Home(),
+          ),
           Food(),
         ],
       ),
