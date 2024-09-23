@@ -1,69 +1,11 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:jaifulfood_k6/page/data/allfooddata.dart'; // นำเข้าคลาส Food จากไฟล์ allfooddata.dart
 
 // ignore: must_be_immutable
 class Home extends StatelessWidget {
-  List foods = [
-    //ร้านแนะนำ
-    "ร้านอุ๋มอิ๋ม",
-    "ร้านนครนายก",
-    "สเต๊กกูหิว",
-    "โรงอาหารกลาง",
-    "กระเพราข้างทาง",
-    "ร้านญี่ปุ่น",
-  ];
-
-  List foods2 = [
-    //ร้านยอดฮิต
-    "ร้านอุ๋มอิ๋ม",
-    "ร้านนครนายก",
-    "สเต๊กกูหิว",
-    "โรงอาหารกลาง",
-    "กะเพราข้างทาง",
-    "ร้านญี่ปุ่น",
-  ];
-
-  List location = [
-    //ประเภทอาหาร
-    "10 กม.",
-    "4 กม.",
-    "13 กม.",
-    "9 กม.",
-    "1 กม.",
-    "5 กม.",
-  ];
-
-  List typefood = [
-    //ประเภทอาหาร
-    "อาหารตามสั่ง",
-    "เนื้อตุ๋นอร่อย",
-    "เนื้อ/สเต๊ก",
-    "โครตถูก",
-    "กะเพราหลายอย่าง",
-    "อันนี้หิว",
-  ];
-
-  List review1 = [
-    //ประเภทอาหาร
-    "7.4",
-    "5.9",
-    "9.1",
-    "6.3",
-    "7.8",
-    "9.9",
-  ];
-
-  List review2 = [
-    //ประเภทอาหาร
-    " (99 รีวิว)",
-    " (812 รีวิว)",
-    " (231 รีวิว)",
-    " (105 รีวิว)",
-    " (592 รีวิว)",
-    " (58 รีวิว)",
-  ];
-
   List<Color> bgColor = [
-    //ปรับสีในช่องร้านแนะนำ
     Color(0xFFFBDCDA),
     Color(0xFFF4DCD3),
     Color(0xFFFBD6D5),
@@ -76,7 +18,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        // เพิ่มส่วนนี้
         child: Material(
           color: const Color.fromARGB(255, 255, 255, 255),
           child: Column(
@@ -188,11 +129,52 @@ class Home extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20),
+
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                /*child:Image.asset(images/banner.jpg
-            ),  //แก้รูปตรงนี้ไม่รูปรูปอันไหน*/
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "โปรโมชั่น",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2.0,
+                    ),
+                  ],
+                ),
               ),
+              CarouselSlider(
+                items: imgList
+                    .map((item) => Container(
+                          child: Center(
+                            child: Image.asset(item,
+                                fit: BoxFit.cover, width: 1000),
+                          ),
+                        ))
+                    .toList(),
+                options: CarouselOptions(
+                  height: 250.0,
+                  aspectRatio: 4 / 3,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.3,
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
+
+              // ร้านแนะนำสำหรับคุณ
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Row(
@@ -224,7 +206,7 @@ class Home extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: foods.length,
+                  itemCount: Food.foods.length, // ใช้ข้อมูลจากคลาส Food
                   itemBuilder: (context, index) {
                     return Container(
                       width: 100,
@@ -237,12 +219,12 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Image.asset(
-                            "assets/${foods[index]}.jpg",
+                            "assets/${Food.foods[index]}.jpg", // ใช้ข้อมูลจากคลาส Food
                             height: 80,
                             width: 80,
                           ),
                           Text(
-                            foods[index],
+                            Food.foods[index], // ใช้ข้อมูลจากคลาส Food
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
@@ -255,7 +237,8 @@ class Home extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 20),
+
+              // ยอดฮิต
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Row(
@@ -285,10 +268,9 @@ class Home extends StatelessWidget {
               SizedBox(
                 height: 220,
                 child: ListView.builder(
-                  ///////////// แถบข้างล่าง**ยอดฮิต
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  itemCount: foods2.length,
+                  itemCount: Food.foods.length, // ใช้ข้อมูลจากคลาส Food
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {},
@@ -315,7 +297,7 @@ class Home extends StatelessWidget {
                                 topRight: Radius.circular(10),
                               ),
                               child: Image.asset(
-                                "assets/${foods2[index]}.jpg",
+                                "assets/${Food.foods[index]}.jpg", // ใช้ข้อมูลจากคลาส Food
                                 height: 120,
                                 width: MediaQuery.of(context).size.width / 1.4,
                                 fit: BoxFit.cover,
@@ -332,7 +314,8 @@ class Home extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        foods2[index],
+                                        Food.foods[
+                                            index], // ใช้ข้อมูลจากคลาส Food
                                         style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.bold,
@@ -340,7 +323,8 @@ class Home extends StatelessWidget {
                                       ),
                                       SizedBox(height: 5),
                                       Text(
-                                        typefood[index],
+                                        Food.typefood[
+                                            index], // ใช้ข้อมูลจากคลาส Food
                                         style: TextStyle(
                                           fontSize: 16,
                                           color: Colors.black45,
@@ -356,12 +340,14 @@ class Home extends StatelessWidget {
                                           ),
                                           SizedBox(width: 5),
                                           Text(
-                                            review1[index],
+                                            Food.review1[
+                                                index], // ใช้ข้อมูลจากคลาส Food
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Text(
-                                            review2[index],
+                                            Food.review2[
+                                                index], // ใช้ข้อมูลจากคลาส Food
                                             style: TextStyle(
                                               color: Colors.black45,
                                             ),
@@ -383,7 +369,8 @@ class Home extends StatelessWidget {
                                             ),
                                             SizedBox(width: 2),
                                             Text(
-                                              location[index],
+                                              Food.location[
+                                                  index], // ใช้ข้อมูลจากคลาส Food
                                               style: TextStyle(
                                                 color: Colors.black45,
                                                 fontWeight: FontWeight.w500,
