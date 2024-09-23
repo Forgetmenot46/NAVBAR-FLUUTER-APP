@@ -11,25 +11,6 @@
 
 ## การติดตั้ง
 
-1. **โคลนโปรเจกต์:**
-
-   ```bash
-   git clone https://github.com/Forgetmenot46/flutter_app_project.git
-เข้าสู่โฟลเดอร์โปรเจกต์:
-
-bash
-คัดลอกโค้ด
-cd flutter_app_project
-ติดตั้งแพ็คเกจ:
-
-bash
-คัดลอกโค้ด
-flutter pub get
-รันแอพ:
-
-bash
-คัดลอกโค้ด
-flutter run
 การใช้งาน
 หลังจากรันแอพ คุณสามารถสำรวจฟีเจอร์ต่าง ๆ ได้ และค้นหาร้านอาหารที่คุณสนใจในคลอง 6
 
