@@ -4,7 +4,7 @@ publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: ">=3.4.3 <4.0.0"
+  sdk: ">=3.4.1 <4.0.0"
 
 dependencies:
   carousel_slider: ^5.0.0
@@ -25,3 +25,19 @@ flutter:
   assets:
     # รูปภาพ
     - assets/banners/Korean_Food.png
+    - assets/banners/1.png
+    - assets/banners/2.png
+    - assets/banners/3.png
+    - assets/banners/4.png
+    
+    - assets/cojohn.png
+  fonts:
+    - family: LINESeedSansTH_A_Bd
+      fonts:
+        - asset: assets/fonts/LINESeedSansTH_A_Bd.ttf
+    - family: LINESeedSansTH_A_Rg
+      fonts:
+        - asset: assets/fonts/LINESeedSansTH_A_Rg.ttf
+       
+        
+

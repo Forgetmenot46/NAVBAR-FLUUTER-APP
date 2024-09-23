@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
                               color: Color(0xFFFF2F08),
                             ),
                             Text(
-                              'God Phoowadin1199977',
+                              'Seyong',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -66,14 +66,14 @@ class Home extends StatelessWidget {
                           margin: EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Color.fromARGB(255, 0, 0, 0) //ถ้าใส่รูปลบท
-                              /*image: DecorationImage(
-                        image: AssetImage("assets/Chicken Burger.jpg"),
+                              color: Color.fromARGB(255, 0, 0, 0), //ถ้าใส่รูปลบท
+                              image: DecorationImage(
+                        image: AssetImage("assets/cojohn.png"),
                         fit: BoxFit.cover,
-                      )*/
+                      )
                               ),
                         ),
-                        Positioned(
+                                                Positioned(
                             child: Container(
                           margin: EdgeInsets.all(5),
                           padding: EdgeInsets.all(5),
@@ -95,7 +95,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width / 1.4,
+                    width: MediaQuery.of(context).size.width / 1.09,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: Color(0xFFF3F3F3),
@@ -111,24 +111,22 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFF2F08),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        Icons.filter_list,
-                        color: Colors.white,
-                        size: 28,
-                      ),
-                    ),
-                  ),
+              
                 ],
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 15), // เพิ่มระยะห่างหลังข้อความ
+
+          // เพิ่มเส้น Divider ใต้คำว่า "Favorite" พร้อม margin ด้านล่าง
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3), // margin-bottom
+            child: Divider(
+              thickness: 2, // ความหนาของเส้น
+              color: Colors.grey[300], // สีของเส้น
+              indent: 15, // ระยะห่างจากซ้าย
+              endIndent: 15, // ระยะห่างจากขวา
+            ),
+          ),
+              SizedBox(height: 5),
 
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -138,16 +136,20 @@ class Home extends StatelessWidget {
                     Text(
                       "โปรโมชั่น",
                       style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'LINESeedSansTH_A_Bd',
+                      
                       ),
                     ),
                     SizedBox(
                       height: 2.0,
                     ),
+                    
                   ],
                 ),
               ),
+              
               CarouselSlider(
                 items: imgList
                     .map((item) => Container(
@@ -173,7 +175,18 @@ class Home extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                 ),
               ),
+              SizedBox(height: 30), // เพิ่มระยะห่างหลังข้อความ
 
+          // เพิ่มเส้น Divider ใต้คำว่า "Favorite" พร้อม margin ด้านล่าง
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3), // margin-bottom
+            child: Divider(
+              thickness: 2, // ความหนาของเส้น
+              color: Colors.grey[300], // สีของเส้น
+              indent: 15, // ระยะห่างจากซ้าย
+              endIndent: 15, // ระยะห่างจากขวา
+            ),
+          ),
               // ร้านแนะนำสำหรับคุณ
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -184,7 +197,7 @@ class Home extends StatelessWidget {
                       "ร้านแนะนำสำหรับคุณ",
                       style: TextStyle(
                         fontSize: 22,
-                        fontWeight: FontWeight.w500,
+                        fontFamily: 'LINESeedSansTH_A_Bd',
                       ),
                     ),
                     TextButton(
@@ -237,6 +250,18 @@ class Home extends StatelessWidget {
                   },
                 ),
               ),
+              SizedBox(height: 30), // เพิ่มระยะห่างหลังข้อความ
+
+          // เพิ่มเส้น Divider ใต้คำว่า "Favorite" พร้อม margin ด้านล่าง
+          Padding(
+            padding: const EdgeInsets.only(bottom: 3), // margin-bottom
+            child: Divider(
+              thickness: 2, // ความหนาของเส้น
+              color: Colors.grey[300], // สีของเส้น
+              indent: 15, // ระยะห่างจากซ้าย
+              endIndent: 15, // ระยะห่างจากขวา
+            ),
+          ),
 
               // ยอดฮิต
               Padding(
@@ -248,7 +273,7 @@ class Home extends StatelessWidget {
                       "ยอดฮิต",
                       style: TextStyle(
                         fontSize: 22,
-                        fontWeight: FontWeight.w500,
+                        fontFamily: 'LINESeedSansTH_A_Bd',
                       ),
                     ),
                     TextButton(
@@ -351,7 +376,7 @@ class Home extends StatelessWidget {
                                             style: TextStyle(
                                               color: Colors.black45,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ],
