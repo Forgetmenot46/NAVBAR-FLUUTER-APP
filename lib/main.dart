@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Curved Navigation Bar Example',
-      theme: ThemeData(fontFamily: "LINESeedSansTH_A_Rg",
+      theme: ThemeData(
+        fontFamily: "LINESeedSansTH_A_Rg",
         colorScheme:
             ColorScheme.fromSeed(seedColor: Color.fromARGB(239, 245, 188, 2)),
         scaffoldBackgroundColor: Colors.white,

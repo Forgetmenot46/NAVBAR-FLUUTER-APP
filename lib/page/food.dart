@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jaifulfood_k6/page/data/allfooddata.dart';
 import 'package:jaifulfood_k6/page/favoriteProvide.dart';
 import 'package:provider/provider.dart';
+// นำเข้าไฟล์ testing_subpage.dart
+import 'package:jaifulfood_k6/page/subpage/testing_subpage.dart'; // ตรวจสอบให้แน่ใจว่า path ถูกต้อง
 
 class FoodWidget extends StatelessWidget {
   @override
@@ -11,10 +13,9 @@ class FoodWidget extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // ส่วนบนที่มี SizedBox และ Row
           SizedBox(height: 70), // เพิ่มระยะห่างด้านบน
           Row(
-            mainAxisAlignment: MainAxisAlignment.start, // จัดวางให้อยู่ทางซ้าย
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(width: 15), // ระยะห่างจากขอบซ้ายของหน้าจอ
               Icon(
@@ -31,16 +32,14 @@ class FoodWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10), // เพิ่มระยะห่างหลังข้อความ
-
-          // เพิ่มเส้น Divider ใต้คำว่า "Favorite" พร้อม margin ด้านล่าง
+          SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.only(bottom: 15), // margin-bottom
+            padding: const EdgeInsets.only(bottom: 15),
             child: Divider(
-              thickness: 2, // ความหนาของเส้น
-              color: Colors.grey[300], // สีของเส้น
-              indent: 15, // ระยะห่างจากซ้าย
-              endIndent: 15, // ระยะห่างจากขวา
+              thickness: 2,
+              color: Colors.grey[300],
+              indent: 15,
+              endIndent: 15,
             ),
           ),
 
@@ -51,16 +50,37 @@ class FoodWidget extends StatelessWidget {
                 child: Column(
                   children: List.generate(Food.foods.length, (index) {
                     String food = Food.foods[index];
+                    String typeFood = Food.typefood[index];
+                    String review1 = Food.review1[index];
+                    String review2 = Food.review2[index];
+                    String location = Food.location[index];
                     bool isFavorite = favoriteProvider.isFavorite(food);
 
                     return InkWell(
-                      onTap: () {},
+                      // เมื่อกดรายการ จะส่งข้อมูลไปยัง testing_subpage.dart
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TestingSubPage(
+                              foodName: food, // ส่งชื่อร้านอาหาร
+                              typeFood: typeFood, // ส่งประเภทอาหาร
+                              review1: review1, // ส่งคะแนนรีวิว
+                              review2: review2, // ส่งจำนวนรีวิว
+                              location: location, // ส่งที่ตั้งร้าน
+                              isFavorite: isFavorite, // ส่งสถานะรายการโปรด
+                            ),
+                          ),
+                        );
+                      },
+
                       child: Container(
-                        width: MediaQuery.of(context).size.width / 1.0, // ปรับให้เหมาะสม
+                        width: MediaQuery.of(context).size.width /
+                            1.0, // ปรับให้เหมาะสม
                         height: MediaQuery.of(context).size.height / 4.5,
                         margin: EdgeInsets.symmetric(
                           horizontal: 15,
-                          vertical: 10, // เพิ่มระยะห่างแนวนอนและแนวตั้ง
+                          vertical: 10,
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -74,8 +94,8 @@ class FoodWidget extends StatelessWidget {
                           ],
                         ),
                         child: Padding(
-                          // เพิ่ม Padding เพื่อเว้นระยะห่างภายใน Container
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(
+                              10), // เพิ่ม Padding เพื่อเว้นระยะห่างภายใน Container
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -87,20 +107,23 @@ class FoodWidget extends StatelessWidget {
                                 child: Image.asset(
                                   "assets/${food}.jpg", // ใช้ข้อมูลจากคลาส Food
                                   height: 120,
-                                  width: MediaQuery.of(context).size.width / 1.4,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.4,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          food, // ใช้ข้อมูลจากคลาส Food
+                                          food,
                                           style: TextStyle(
                                             fontSize: 17,
                                             fontWeight: FontWeight.bold,
@@ -108,7 +131,7 @@ class FoodWidget extends StatelessWidget {
                                         ),
                                         SizedBox(height: 5),
                                         Text(
-                                          Food.typefood[index], // ใช้ข้อมูลจากคลาส Food
+                                          typeFood,
                                           style: TextStyle(
                                             fontSize: 16,
                                             color: Colors.black45,
@@ -124,12 +147,12 @@ class FoodWidget extends StatelessWidget {
                                             ),
                                             SizedBox(width: 5),
                                             Text(
-                                              Food.review1[index], // ใช้ข้อมูลจากคลาส Food
+                                              review1,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
                                             Text(
-                                              Food.review2[index], // ใช้ข้อมูลจากคลาส Food
+                                              review2,
                                               style: TextStyle(
                                                 color: Colors.black45,
                                               ),
@@ -168,7 +191,7 @@ class FoodWidget extends StatelessWidget {
                                               ),
                                               SizedBox(width: 2),
                                               Text(
-                                                Food.location[index], // ใช้ข้อมูลจากคลาส Food
+                                                location,
                                                 style: TextStyle(
                                                   color: Colors.black45,
                                                   fontWeight: FontWeight.w500,
