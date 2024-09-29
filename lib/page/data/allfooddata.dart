@@ -52,3 +52,12 @@ final List<String> imgList = [
   'assets/banners/3.png',
   'assets/banners/4.png',
 ];
+
+final List<String> restaurantImg = [ 
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+];

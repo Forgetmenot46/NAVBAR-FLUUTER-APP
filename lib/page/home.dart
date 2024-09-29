@@ -293,6 +293,7 @@ class Home extends StatelessWidget {
                               review1: Food.review1[index],
                               review2: Food.review2[index],
                               location: Food.location[index],
+                              imagePath: restaurantImg[index],
                               isFavorite: favoriteProvider.isFavorite(
                                   Food.foods[index]), // ส่งสถานะรายการโปรด
                             ),
@@ -322,7 +323,7 @@ class Home extends StatelessWidget {
                                 topRight: Radius.circular(10),
                               ),
                               child: Image.asset(
-                                "assets/${Food.foods[index]}.jpg",
+                                restaurantImg[index],
                                 height: 120,
                                 width: MediaQuery.of(context).size.width / 1.4,
                                 fit: BoxFit.cover,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jaifulfood_k6/page/data/allfooddata.dart';
-import 'package:jaifulfood_k6/page/favoriteProvide.dart';
 import 'package:provider/provider.dart';
+import 'package:jaifulfood_k6/page/favoriteProvide.dart';
 import 'package:jaifulfood_k6/page/subpage/testing_subpage.dart';
+import 'package:jaifulfood_k6/page/data/allfooddata.dart'; // ตรวจสอบให้แน่ใจว่า path ถูกต้อง
 
 class Favorite extends StatelessWidget {
   @override
@@ -58,10 +58,11 @@ class Favorite extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => TestingSubPage(
                                 foodName: food,
-                                typeFood: Food.typefood[index], // ใช้ typefood ที่ถูกต้อง
+                                typeFood: Food.typefood[index],
                                 review1: Food.review1[index],
                                 review2: Food.review2[index],
                                 location: Food.location[index],
+                                imagePath: restaurantImg[index],
                                 isFavorite: true, // เป็นรายการโปรดแน่นอน
                               ),
                             ),
@@ -96,7 +97,7 @@ class Favorite extends StatelessWidget {
                                     topRight: Radius.circular(10),
                                   ),
                                   child: Image.asset(
-                                    "assets/${food}.jpg",
+                                   restaurantImg[index],
                                     height: 120,
                                     width: MediaQuery.of(context).size.width / 1.4,
                                     fit: BoxFit.cover,
@@ -154,6 +155,21 @@ class Favorite extends StatelessWidget {
                                             padding: EdgeInsets.all(8),
                                             child: Row(
                                               children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    favoriteProvider.isFavorite(food)
+                                                        ? Icons.favorite
+                                                        : Icons.favorite_border,
+                                                    color: Colors.red,
+                                                  ),
+                                                  onPressed: () {
+                                                    if (favoriteProvider.isFavorite(food)) {
+                                                      favoriteProvider.removeFavorite(food);
+                                                    } else {
+                                                      favoriteProvider.addFavorite(food);
+                                                    }
+                                                  },
+                                                ),
                                                 Icon(
                                                   Icons.location_on,
                                                   color: Color(0xFFFF2F08),

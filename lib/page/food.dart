@@ -68,11 +68,14 @@ class FoodWidget extends StatelessWidget {
                               review1: review1, // ส่งคะแนนรีวิว
                               review2: review2, // ส่งจำนวนรีวิว
                               location: location, // ส่งที่ตั้งร้าน
-                              isFavorite: isFavorite, // ส่งสถานะรายการโปรด
+                              isFavorite: isFavorite,
+                              imagePath: restaurantImg[index],// ส่งสถานะรายการโปรด
                             ),
                           ),
                         );
                       },
+
+
 
                       child: Container(
                         width: MediaQuery.of(context).size.width /
@@ -105,7 +108,7 @@ class FoodWidget extends StatelessWidget {
                                   topRight: Radius.circular(10),
                                 ),
                                 child: Image.asset(
-                                  "assets/${food}.jpg", // ใช้ข้อมูลจากคลาส Food
+                                  restaurantImg[index], // ใช้ข้อมูลจากคลาส Food
                                   height: 120,
                                   width:
                                       MediaQuery.of(context).size.width / 1.4,
