@@ -2,32 +2,74 @@ import 'package:flutter/material.dart';
 import 'package:jaifulfood_k6/page/data/allfooddata.dart';
 import 'package:jaifulfood_k6/page/favoriteProvide.dart';
 import 'package:provider/provider.dart';
-// นำเข้าไฟล์ testing_subpage.dart
-import 'package:jaifulfood_k6/page/subpage/testing_subpage.dart'; // ตรวจสอบให้แน่ใจว่า path ถูกต้อง
+import 'package:jaifulfood_k6/page/subpage/testing_subpage.dart';
 
-class FoodWidget extends StatelessWidget {
+class FoodWidget extends StatefulWidget {
+  @override
+  _FoodWidgetState createState() => _FoodWidgetState();
+}
+
+class _FoodWidgetState extends State<FoodWidget> {
+  TextEditingController searchController = TextEditingController();
+  String searchQuery = '';
+
   @override
   Widget build(BuildContext context) {
     final favoriteProvider = Provider.of<FavoriteProvider>(context);
 
+    // ฟิลเตอร์รายการอาหารตามคำค้นหา
+    List<String> filteredFoods = Food.foods
+        .where((food) => food.toLowerCase().contains(searchQuery.toLowerCase()))
+        .toList();
+
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(height: 70), // เพิ่มระยะห่างด้านบน
+          SizedBox(height: 70),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(width: 15), // ระยะห่างจากขอบซ้ายของหน้าจอ
+              SizedBox(width: 15),
               Icon(
                 Icons.restaurant,
                 color: Color(0xFFFF2F08),
               ),
-              SizedBox(width: 8), // ระยะห่างระหว่างไอคอนและข้อความ
+              SizedBox(width: 8),
               Text(
                 'Location',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 1.09,
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Color(0xFFF3F3F3),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: TextFormField(
+                    controller: searchController,
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery =
+                            value; // อัปเดตคำค้นหาเมื่อมีการเปลี่ยนแปลง
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'ค้นหาร้านที่คุณอยากไป',
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.search_rounded),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -48,13 +90,16 @@ class FoodWidget extends StatelessWidget {
             child: SingleChildScrollView(
               child: Center(
                 child: Column(
-                  children: List.generate(Food.foods.length, (index) {
-                    String food = Food.foods[index];
-                    String typeFood = Food.typefood[index];
-                    String review1 = Food.review1[index];
-                    String review2 = Food.review2[index];
-                    String location = Food.location[index];
+                  children: List.generate(filteredFoods.length, (index) {
+                    String food = filteredFoods[index];
+                    int originalIndex = Food.foods.indexOf(food);
+                    String typeFood = Food.typefood[originalIndex];
+                    String review1 = Food.review1[originalIndex];
+                    String review2 = Food.review2[originalIndex];
+                    String location = Food.location[originalIndex];
                     bool isFavorite = favoriteProvider.isFavorite(food);
+                    String addressString =
+                        "Lat: ${Food.address[originalIndex]['lat']}, Lng: ${Food.address[originalIndex]['lng']}";
 
                     return InkWell(
                       // เมื่อกดรายการ จะส่งข้อมูลไปยัง testing_subpage.dart
@@ -63,24 +108,27 @@ class FoodWidget extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => TestingSubPage(
-                              foodName: food, // ส่งชื่อร้านอาหาร
-                              typeFood: typeFood, // ส่งประเภทอาหาร
-                              review1: review1, // ส่งคะแนนรีวิว
-                              review2: review2, // ส่งจำนวนรีวิว
-                              location: location, // ส่งที่ตั้งร้าน
+                              foodName: food,
+                              typeFood: typeFood,
+                              review1: review1,
+                              review2: review2,
+                              location: location,
+                              opentime: Food.opentime[originalIndex],
+                              phoneNum: Food.phoneNum[originalIndex],
+                              address: addressString,
+                              displayAddress:
+                                  Food.displayAddress[originalIndex],
                               isFavorite: isFavorite,
-                              imagePath: restaurantImg[index],// ส่งสถานะรายการโปรด
+                              description: Food.description[originalIndex],
+                              imagePath: restaurantImg[originalIndex],
                             ),
                           ),
                         );
                       },
 
-
-
                       child: Container(
-                        width: MediaQuery.of(context).size.width /
-                            1.0, // ปรับให้เหมาะสม
-                        height: MediaQuery.of(context).size.height / 4.5,
+                        width: MediaQuery.of(context).size.width / 1.0,
+                        height: MediaQuery.of(context).size.height / 3.5,
                         margin: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 10,
@@ -97,8 +145,7 @@ class FoodWidget extends StatelessWidget {
                           ],
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(
-                              10), // เพิ่ม Padding เพื่อเว้นระยะห่างภายใน Container
+                          padding: EdgeInsets.all(10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -108,10 +155,10 @@ class FoodWidget extends StatelessWidget {
                                   topRight: Radius.circular(10),
                                 ),
                                 child: Image.asset(
-                                  restaurantImg[index], // ใช้ข้อมูลจากคลาส Food
+                                  restaurantImg[originalIndex],
                                   height: 120,
                                   width:
-                                      MediaQuery.of(context).size.width / 1.4,
+                                      MediaQuery.of(context).size.width / 1.0,
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -185,6 +232,9 @@ class FoodWidget extends StatelessWidget {
                                                     favoriteProvider
                                                         .addFavorite(food);
                                                   }
+                                                  setState(() {
+                                                    // Update the favorite state
+                                                  });
                                                 },
                                               ),
                                               Icon(

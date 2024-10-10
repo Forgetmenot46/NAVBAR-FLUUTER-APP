@@ -1,4 +1,5 @@
 class Food {
+  // // // // // // // // // // // ส่วนของร้านทั้งหมด
   static List<String> foods = [
     "ร้านอุ๋มอิ๋ม",
     "ร้านนครนายก",
@@ -8,6 +9,15 @@ class Food {
     "ร้านญี่ปุ่น",
   ];
 
+  static List<String> description = [
+    "บรรยากาศและการตกแต่งร้าน ร้านมีบรรยากาศที่ผ่อนคลายและสบาย เหมาะสำหรับครอบครัว โดยมีการตกแต่งที่เน้นความเรียบง่าย มีการจัดสวนเล็กๆ มีดอกไม้และน้ำพุช่วยเพิ่มความสดชื่น ร้านนี้มีความโปร่งสบาย ทำให้ลูกค้ารู้สึกผ่อนคลายขณะรับประทานอาหาร",
+    "ร้านมีบรรยากาศเงียบสงบ ด้วยสวนเล็ก ๆ ที่เต็มไปด้วยต้นไม้และดอกไม้สวยงาม ช่วยเพิ่มความรู้สึกสดชื่นให้กับผู้มาเยือน",
+    "ร้านนี้มีการจัดวางโต๊ะและที่นั่งอย่างเหมาะสม สร้างความเป็นส่วนตัวให้กับผู้ที่มารับประทานอาหารในทุกมื้อ",
+    "บรรยากาศในร้านเต็มไปด้วยเสียงเพลงเบาๆ ที่ช่วยเสริมสร้างความผ่อนคลาย ทำให้ทุกมื้ออาหารเต็มไปด้วยความสุข",
+    "ร้านมีการใช้โทนสีอ่อนและเฟอร์นิเจอร์ไม้เพื่อสร้างบรรยากาศที่อบอุ่นและเป็นกันเอง เหมาะสำหรับการมาทานอาหารกับครอบครัว",
+    "บรรยากาศที่สงบและเป็นธรรมชาติของร้านนี้ทำให้ผู้ที่มาเยือนสามารถผ่อนคลายและดื่มด่ำกับบรรยากาศได้อย่างเต็มที่",
+  ];
+
   static List<String> location = [
     "10 กม.",
     "4 กม.",
@@ -15,6 +25,40 @@ class Food {
     "9 กม.",
     "1 กม.",
     "5 กม.",
+  ];
+
+  static List<Map<String, dynamic>> address = [
+    {'lat': 14.036476390671057, 'lng': 100.7370041608162},
+    {'lat': 14.036476390671057, 'lng': 100.7370041608162},
+    {'lat': 14.036476390671057, 'lng': 100.7370041608162},
+    {'lat': 14.036476390671057, 'lng': 100.7370041608162},
+    {'lat': 14.036476390671057, 'lng': 100.7370041608162},
+    {'lat': 14.036476390671057, 'lng': 100.7370041608162},
+  ];
+
+  static List<String> displayAddress = [
+    "130/133 ถนนรังสิต-นครนายก ตำบลรังสิต Thanyaburi District, Pathum Thani 12110",
+    "130/133 ถนนรังสิต-นครนายก ตำบลรังสิต Thanyaburi District, Pathum Thani 12110",
+    "130/133 ถนนรังสิต-นครนายก ตำบลรังสิต Thanyaburi District, Pathum Thani 12110",
+    "130/133 ถนนรังสิต-นครนายก ตำบลรังสิต Thanyaburi District, Pathum Thani 12110",
+    "130/133 ถนนรังสิต-นครนายก ตำบลรังสิต Thanyaburi District, Pathum Thani 12110",
+    "130/133 ถนนรังสิต-นครนายก ตำบลรังสิต Thanyaburi District, Pathum Thani 12110",
+  ];
+
+  static List<String> opentime = [
+    "เปิดทุกวันทำการ เวลา 9:00AM - 13:50PM",
+    "เปิด จ. อ. พ. วันทำการ เวลา 9:00AM - 13:50PM",
+    "เปิดเปิดทุกวันยกเว้นวัน ส.  เวลา 9:00AM - 13:50PM",
+    "เปิดทุกวันทำการ เวลา 9:00AM - 13:50PM",
+    "เปิดทุกวันทำการ เวลา 9:00AM - 13:50PM",
+  ];
+  static List<String> phoneNum = [
+    "0993271546",
+    "0993271546",
+    "0993271546",
+    "0993271546",
+    "0993271546",
+    "0993271546",
   ];
 
   static List<String> typefood = [
@@ -27,24 +71,36 @@ class Food {
   ];
 
   static List<String> review1 = [
-    "7.4",
-    "5.9",
-    "9.1",
-    "6.3",
-    "7.8",
-    "9.9",
+    "4.0",
+    "4.5",
+    "2.4",
+    "3.3",
+    "4.2",
+    "5",
   ];
 
   static List<String> review2 = [
-    " (99 รีวิว)",
-    " (812 รีวิว)",
-    " (231 รีวิว)",
-    " (105 รีวิว)",
-    " (592 รีวิว)",
-    " (58 รีวิว)",
+    " (40 รีวิว)",
+    " (40 รีวิว)",
+    " (40 รีวิว)",
+    " (40 รีวิว)",
+    " (40 รีวิว)",
+    " (40 รีวิว)",
   ];
 }
 
+final List<String> restaurantImg = [
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+  'assets/banners/Korean_Food.png',
+];
+
+// // // // // // // // // // // ส่วนของร้านทั้งหมด
+
+// // // // // // // // // // // Banner
 final List<String> imgList = [
   'assets/banners/Korean_Food.png',
   'assets/banners/1.png',
@@ -52,12 +108,4 @@ final List<String> imgList = [
   'assets/banners/3.png',
   'assets/banners/4.png',
 ];
-
-final List<String> restaurantImg = [ 
-  'assets/banners/Korean_Food.png',
-  'assets/banners/Korean_Food.png',
-  'assets/banners/Korean_Food.png',
-  'assets/banners/Korean_Food.png',
-  'assets/banners/Korean_Food.png',
-  'assets/banners/Korean_Food.png',
-];
+// // // // // // // // // // // Banner

@@ -95,8 +95,8 @@ class _MainState extends State<Main> {
           });
         },
         height: 65,
-        color: Color.fromRGBO(255, 47, 8, 1),
-        backgroundColor: Colors.transparent,
+        color: Color.fromRGBO(255, 47, 8, 1), // สีของ navigation bar
+        backgroundColor: Colors.transparent, // ตั้งค่าเป็นโปร่งใส
         animationCurve: Curves.fastLinearToSlowEaseIn,
         animationDuration: const Duration(milliseconds: 660),
       ),
